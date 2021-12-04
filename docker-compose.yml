@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_URL: postgres://postgres:123456@localhost:5432/edemy_app_development
+      POSTGRES_DB: edemy_app_development
+      POSTGRES_HOST: postgres
+
+  edemy:
+    container_name: edemy
+    build: ./
+    command: npm dev
+    working_dir: /app
+    ports:
+      - '3000:3000'
+
+    volumes:
+      - ./:/app
