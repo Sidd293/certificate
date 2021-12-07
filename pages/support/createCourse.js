@@ -207,7 +207,7 @@ const Create = () => {
       // setCoverPhotoPreview("");
       // setCoursePreviewImg("");
       toast.success(response.data);
-      router.replace("/teacher/course/upload-course-video");
+      // router.replace("/teacher/course/upload-course-video");
     } catch (err) {
       catchErrors(err, setError);
       toast.error(error);
@@ -219,10 +219,10 @@ const Create = () => {
   return (
     <React.Fragment>
       <PageBanner
-        pageTitle="Teacher Course Create"
+        pageTitle="Support Course Create"
         homePageUrl="/"
         homePageText="Home"
-        activePageText="Teacher Course Create"
+        activePageText="Support Course Create"
       />
 
       <div className="ptb-100">
@@ -232,32 +232,37 @@ const Create = () => {
               <div className="td-sidebar">
                 <ul>
                   <li>
-                    <Link href="/teacher/courses" activeClassName="active">
-                      <a>My Courses</a>
+                    <Link href="/support/allusers" activeClassName="active">
+                      <a>All Users</a>
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/teacher/course/create"
+                      href="/support/brainlox-cash"
                       activeClassName="active"
                     >
-                      <a>Create A Course</a>
+                      <a>Brainlox Cash</a>
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/teacher/courses/course-edit"
-                      activeClassName="active"
-                    >
-                      <a>Edit My Course</a>
+                    <Link href="/support/courses" activeClassName="active">
+                      <a>All Courses</a>
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/teacher/course/upload-course-video"
-                      activeClassName="active"
-                    >
-                      <a>Upload Course Video</a>
+                    <Link href="/support/createCourse" activeClassName="active">
+                      <a>Create a Course</a>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link href="/support/curriculum" activeClassName="active">
+                      <a>Course Curriculum</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/support/appsettings" activeClassName="active">
+                      <a>App Settings</a>
                     </Link>
                   </li>
                 </ul>

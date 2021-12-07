@@ -90,7 +90,7 @@ module.exports = {
       },
       role: {
         type: Sequelize.ENUM,
-        values: ['student', 'admin', 'teacher'],
+        values: ['student', 'admin', 'teacher', 'support'],
         defaultValue: 'student'
       },
       active: {

@@ -9,6 +9,9 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: ADMIN_EMAIL,
         pass: ADMIN_PASSWORD
+    },
+    tls:{
+        rejectUnauthorized: false
     }
 });
 

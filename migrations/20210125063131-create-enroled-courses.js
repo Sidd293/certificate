@@ -22,6 +22,15 @@ module.exports = {
           as: 'courseId'
         }
       },
+      teacherId: {
+        type: Sequelize.UUID,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'teacherId'
+        }
+      },
       userId: {
         type: Sequelize.UUID,
         onDelete: 'CASCADE',

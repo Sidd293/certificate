@@ -6,7 +6,7 @@ import axios from 'axios'
 import baseUrl from '@/utils/baseUrl'
 
 const MyCourses = ({ enrolled }) => {
-  console.log(enrolled)
+//   console.log(enrolled)
   return (
         <React.Fragment>
             <PageBanner

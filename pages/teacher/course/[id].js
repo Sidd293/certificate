@@ -19,9 +19,9 @@ const Edit = ({ existingData }) => {
     overview: existingData.overview,
     price: existingData.price,
     profilePhoto: '',
-    coverPhoto: '',
-    course_preview_img: '',
-    course_preview_video: existingData.course_preview_video,
+    // coverPhoto: '',
+    // course_preview_img: '',
+    // course_preview_video: existingData.course_preview_video,
     duration: existingData.duration,
     lessons: existingData.lessons,
     category: existingData.category
@@ -29,8 +29,8 @@ const Edit = ({ existingData }) => {
 
   const [course, setCourse] = React.useState(INIT_COURSE)
   const [profilePreview, setProfilePreview] = React.useState('')
-  const [coverPhotoPreview, setCoverPhotoPreview] = React.useState('')
-  const [coursePreviewImg, setCoursePreviewImg] = React.useState('')
+  // const [coverPhotoPreview, setCoverPhotoPreview] = React.useState('')
+  // const [coursePreviewImg, setCoursePreviewImg] = React.useState('')
   const [imageUploading, setImageUploading] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [disabled, setDisabled] = React.useState(true)
@@ -57,29 +57,32 @@ const Edit = ({ existingData }) => {
       }
       setCourse(prevState => ({ ...prevState, profilePhoto: files[0] }))
       setProfilePreview(window.URL.createObjectURL(files[0]))
-    } else if (name === 'coverPhoto') {
-      const coverPhotoSize = files[0].size / 1024 / 1024
-      if (coverPhotoSize > 2) {
-        addToast('The cover photo size greater than 2 MB. Make sure less than 2 MB.', {
-          appearance: 'error'
-        })
-        e.target.value = null
-        return
-      }
-      setCourse(prevState => ({ ...prevState, coverPhoto: files[0] }))
-      setCoverPhotoPreview(window.URL.createObjectURL(files[0]))
-    } else if (name === 'course_preview_img') {
-      const course_preview_img = files[0].size / 1024 / 1024
-      if (course_preview_img > 2) {
-        addToast('The course preview omage size greater than 2 MB. Make sure less than 2 MB.', {
-          appearance: 'error'
-        })
-        e.target.value = null
-        return
-      }
-      setCourse(prevState => ({ ...prevState, course_preview_img: files[0] }))
-      setCoursePreviewImg(window.URL.createObjectURL(files[0]))
-    } else {
+    } 
+    // else if (name === 'coverPhoto') {
+    //   const coverPhotoSize = files[0].size / 1024 / 1024
+    //   if (coverPhotoSize > 2) {
+    //     addToast('The cover photo size greater than 2 MB. Make sure less than 2 MB.', {
+    //       appearance: 'error'
+    //     })
+    //     e.target.value = null
+    //     return
+    //   }
+    //   setCourse(prevState => ({ ...prevState, coverPhoto: files[0] }))
+    //   setCoverPhotoPreview(window.URL.createObjectURL(files[0]))
+    // } 
+    // else if (name === 'course_preview_img') {
+    //   const course_preview_img = files[0].size / 1024 / 1024
+    //   if (course_preview_img > 2) {
+    //     addToast('The course preview omage size greater than 2 MB. Make sure less than 2 MB.', {
+    //       appearance: 'error'
+    //     })
+    //     e.target.value = null
+    //     return
+    //   }
+    //   setCourse(prevState => ({ ...prevState, course_preview_img: files[0] }))
+    //   setCoursePreviewImg(window.URL.createObjectURL(files[0]))
+    // } 
+    else {
       setCourse(prevState => ({ ...prevState, [name]: value }))
     }
     // console.log(course);
@@ -103,41 +106,41 @@ const Edit = ({ existingData }) => {
     return profilePhotoUrl
   }
 
-  const handlecoverPhotoUpload = async () => {
-    setImageUploading(true)
-    // console.log(post.file_url)
-    const data = new FormData()
-    data.append('file', course.coverPhoto)
-    data.append('upload_preset', 'vikings')
-    data.append('cloud_name', 'dev-empty')
-    let response
-    if (course.coverPhoto) {
-      response = await axios.post(process.env.CLOUDINARY_URL, data)
-    }
+  // const handlecoverPhotoUpload = async () => {
+  //   setImageUploading(true)
+  //   // console.log(post.file_url)
+  //   const data = new FormData()
+  //   data.append('file', course.coverPhoto)
+  //   data.append('upload_preset', 'vikings')
+  //   data.append('cloud_name', 'dev-empty')
+  //   let response
+  //   if (course.coverPhoto) {
+  //     response = await axios.post(process.env.CLOUDINARY_URL, data)
+  //   }
 
-    const cover_photo_url = response.data.url
+  //   const cover_photo_url = response.data.url
 
-    return cover_photo_url
-  }
+  //   return cover_photo_url
+  // }
 
-  const handlePreviewPhotoUpload = async () => {
-    setImageUploading(true)
-    // console.log(post.file_url)
-    const data = new FormData()
-    data.append('file', course.course_preview_img)
-    data.append('upload_preset', 'vikings')
-    data.append('cloud_name', 'dev-empty')
-    let response
+  // const handlePreviewPhotoUpload = async () => {
+  //   setImageUploading(true)
+  //   // console.log(post.file_url)
+  //   const data = new FormData()
+  //   data.append('file', course.course_preview_img)
+  //   data.append('upload_preset', 'vikings')
+  //   data.append('cloud_name', 'dev-empty')
+  //   let response
 
-    if (course.course_preview_img) {
-      response = await axios.post(process.env.CLOUDINARY_URL, data)
-    }
+  //   if (course.course_preview_img) {
+  //     response = await axios.post(process.env.CLOUDINARY_URL, data)
+  //   }
 
-    const preview_photo_response_url = response.data.url
-    setImageUploading(false)
-    setLoading(true)
-    return preview_photo_response_url
-  }
+  //   const preview_photo_response_url = response.data.url
+  //   setImageUploading(false)
+  //   setLoading(true)
+  //   return preview_photo_response_url
+  // }
 
   const handleCourseUpdate = async e => {
     e.preventDefault()

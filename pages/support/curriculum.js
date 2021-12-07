@@ -133,42 +133,37 @@ const UploadCourseVideo = ({ courses }) => {
               <div className="td-sidebar">
                 <ul>
                   <li>
-                    <Link href="/teacher/courses" activeClassName="active">
-                      <a>My Courses</a>
+                    <Link href="/support/allusers" activeClassName="active">
+                      <a>All Users</a>
                     </Link>
                   </li>
                   <li>
                     <Link
-                      href="/teacher/course/create"
+                      href="/support/brainlox-cash"
                       activeClassName="active"
                     >
-                      <a>Create A Course</a>
+                      <a>Brainlox Cash</a>
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/teacher/courses/course-edit"
-                      activeClassName="active"
-                    >
-                      <a>Edit My Course</a>
+                    <Link href="/support/courses" activeClassName="active">
+                      <a>All Courses</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/admin/curriculum" activeClassName="active">
-                      <a>Upload Course Curriculum</a>
+                    <Link href="/support/createCourse" activeClassName="active">
+                      <a>Create a Course</a>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link href="/support/curriculum" activeClassName="active">
+                      <a>Course Curriculum</a>
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      href="/admin/update-curriculum"
-                      activeClassName="active"
-                    >
-                      <a>Update Course Curriculum</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/admin/dashboard" activeClassName="active">
-                      <a>Back to Dashboard</a>
+                    <Link href="/support/appsettings" activeClassName="active">
+                      <a>App Settings</a>
                     </Link>
                   </li>
                 </ul>

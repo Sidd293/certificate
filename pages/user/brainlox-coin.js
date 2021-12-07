@@ -4,8 +4,11 @@ import PageBanner from '@/components/Common/PageBanner';
 import axios from 'axios';
 import baseUrl from '@/utils/baseUrl';
 import Cookies from 'js-cookie';
+import { parseCookies } from "nookies";
 import ReactPayPal from '@/components/Payments/PayPalButton';
 import Link from 'next/link';
+import { redirectUser } from "@/utils/auth";
+
 
 const brainloxCoins = ({name, brainlox_coin}) => {
   return (
@@ -128,11 +131,19 @@ const brainloxCoins = ({name, brainlox_coin}) => {
   );
 };
 
-brainloxCoins.getInitialProps = async () => {
+brainloxCoins.getInitialProps = async (ctx) => {
+  const { token } = parseCookies(ctx);
+  if (!token) {
+    redirectUser(ctx, "/");
+  }
+
+  const payload = {
+    headers: { Authorization: token },
+  };
+
   const url = `${baseUrl}/api/v1/auth/account`;
-  const headers = {authorization: `${Cookies.get ('token')}`};
-  const response = await axios.get (url, {headers});
-  console.log ('Reponse: ' + JSON.stringify (response.data.brainlox_coin));
+  const response = await axios.get(url, payload);
+  // console.log(response.data)
   return response.data;
 };
 
