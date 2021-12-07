@@ -15,10 +15,10 @@ const adminCourses = ({ courses }) => {
   return (
     <React.Fragment>
       <PageBanner
-        pageTitle="Admin Dashboard"
+        pageTitle="Support Dashboard"
         homePageUrl="/"
         homePageText="Home"
-        activePageText="Admin Dashboard"
+        activePageText="Support Dashboard"
       />
 
       <div className="ptb-100">
@@ -28,13 +28,37 @@ const adminCourses = ({ courses }) => {
               <div className="td-sidebar">
                 <ul>
                   <li>
-                    <Link href="/admin/courses" activeClassName="active">
+                    <Link href="/support/allusers" activeClassName="active">
+                      <a>All Users</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/support/brainlox-cash"
+                      activeClassName="active"
+                    >
+                      <a>Brainlox Cash</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/support/courses" activeClassName="active">
                       <a>All Courses</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/admin/dashboard" activeClassName="active">
-                      <a>Back to Dashboard</a>
+                    <Link href="/support/createCourse" activeClassName="active">
+                      <a>Create a Course</a>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link href="/support/curriculum" activeClassName="active">
+                      <a>Course Curriculum</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/support/appsettings" activeClassName="active">
+                      <a>App Settings</a>
                     </Link>
                   </li>
                 </ul>

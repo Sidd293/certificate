@@ -16,8 +16,7 @@ const CoursesCurriculum = ({ videos }) => {
 //   console.log(sortedVideos);
   return (
     <div className="courses-curriculum">
-      <h3>Course Videos</h3>
-      {sortedVideos ? (
+      {sortedVideos && sortedVideos.length ? (
         <ul>
           {sortedVideos.map((video) => (
             <li key={video.order}>
@@ -38,7 +37,7 @@ const CoursesCurriculum = ({ videos }) => {
           ))}
         </ul>
       ) : (
-        <h3>No Videos</h3>
+        <h3>Coming Soon ...</h3>
       )}
     </div>
   );

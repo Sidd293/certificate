@@ -16,7 +16,7 @@ const Details = ({ course, user }) => {
                 pageTitle={course.title}
                 homePageUrl="/"
                 homePageText="Home"
-                innerPageUrl="/courses-1"
+                innerPageUrl="/courses"
                 innerPageText="Courses"
                 activePageText={course.title}
             />

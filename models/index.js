@@ -14,7 +14,7 @@ import enrolled_course from '../migrations/20210125063131-create-enroled-courses
 // import cart from '../migrations/20211103152632-create-cart';
 import appSettings from "../migrations/20211106161551-create-app-settings";
 
-import userUpdated from "../migrations/20211110142150-modify_users_add_new_fields";
+// import userUpdated from "../migrations/20211110142150-modify_users_add_new_fields";
 
 ('use strict');
 // main model file

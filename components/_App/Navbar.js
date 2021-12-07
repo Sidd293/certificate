@@ -25,6 +25,7 @@ const Navbar = ({ user }) => {
 
   const isAdmin = user && user.role === "admin";
   const isTeacher = user && user.role === "teacher";
+  const isSupport = user && user.role === "support";
 
   const classOne = menu
     ? "collapse navbar-collapse"
@@ -106,7 +107,7 @@ const Navbar = ({ user }) => {
                     </Link>
                   </li>
 
-                  {((user && isTeacher) || (user && isAdmin)) && (
+                  {((user && isTeacher) || (user && isAdmin)) || (user && isSupport) && (
                     <li className="nav-item">
                       <Link href="/teacher/dashboard">
                         <a className="nav-link">Teacher Dashboard</a>

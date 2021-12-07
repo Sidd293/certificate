@@ -70,28 +70,37 @@ const brainloxCash = ({ users }) => {
               <div className="td-sidebar">
                 <ul>
                   <li>
-                    <Link href="/admin/courses" activeClassName="active">
-                      <a>All Courses</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/admin/curriculum" activeClassName="active">
-                      <a>Course Curriculum</a>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/admin/users" activeClassName="active">
+                    <Link href="/support/allusers" activeClassName="active">
                       <a>All Users</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/admin/brainlox-cash" activeClassName="active">
+                    <Link
+                      href="/support/brainlox-cash"
+                      activeClassName="active"
+                    >
                       <a>Brainlox Cash</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/admin/dashboard" activeClassName="active">
-                      <a>Back to Dashboard</a>
+                    <Link href="/support/courses" activeClassName="active">
+                      <a>All Courses</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/support/createCourse" activeClassName="active">
+                      <a>Create a Course</a>
+                    </Link>
+                  </li>
+
+                  <li>
+                    <Link href="/support/curriculum" activeClassName="active">
+                      <a>Course Curriculum</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/support/appsettings" activeClassName="active">
+                      <a>App Settings</a>
                     </Link>
                   </li>
                 </ul>
@@ -227,7 +236,7 @@ brainloxCash.getInitialProps = async (ctx) => {
   };
   const url = `${baseUrl}/api/v1/admin/users`;
   const response = await axios.get(url, payload);
-  console.log(response)
+  console.log(response);
   return response.data;
 };
 
