@@ -1,5 +1,5 @@
-const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'http://localhost:3000'
 
-// const baseUrl = 'https://brainlox-next-js.vercel.app'
+const baseUrl = 'https://brainlox.com'
 
 export default baseUrl;
