@@ -1,9 +1,9 @@
 {
 	"development": {
-		"username": "sxhtymafgofeuz",
-		"password": "787c8df8725df7e5cb51f0adb1bff0f54ab1beb181381f9a272b555bee50a2cb",
-		"database": "dfrdeqif5p2cpv",
-		"host": "ec2-3-219-111-26.compute-1.amazonaws.com",
+		"username": "postgres",
+		"password": "e6xuqyhzCja7O8vb",
+		"database": "postgres",
+		"host": "104.198.19.192",
 		"port":5432,
 		"dialect": "postgres",
 		"dialectOptions": {
@@ -16,10 +16,10 @@
 		  "ssl": true
 	},
 	"test": {
-		"username": "sxhtymafgofeuz",
-		"password": "787c8df8725df7e5cb51f0adb1bff0f54ab1beb181381f9a272b555bee50a2cb",
-		"database": "dfrdeqif5p2cpv",
-		"host": "ec2-3-219-111-26.compute-1.amazonaws.com",
+		"username": "postgres",
+		"password": "e6xuqyhzCja7O8vb",
+		"database": "postgres",
+		"host": "104.198.19.192",
 		"port":5432,
 		"dialect": "postgres",
 		"dialectOptions": {
@@ -32,10 +32,10 @@
 		  "ssl": true
 	},
 	"production": {
-		"username": "sxhtymafgofeuz",
-		"password": "787c8df8725df7e5cb51f0adb1bff0f54ab1beb181381f9a272b555bee50a2cb",
-		"database": "dfrdeqif5p2cpv",
-		"host": "ec2-3-219-111-26.compute-1.amazonaws.com",
+		"username": "postgres",
+		"password": "e6xuqyhzCja7O8vb",
+		"database": "postgres",
+		"host": "104.198.19.192",
 		"port":5432,
 		"dialect": "postgres",
 		"dialectOptions": {
