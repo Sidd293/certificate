@@ -1,5 +1,6 @@
 const path = require('path');
 const withPWA = require('next-pwa');
+const config = require('./config/config.json');
 
 module.exports = withPWA({
 	webpack: (config, { isServer }) => {
@@ -23,10 +24,10 @@ module.exports = withPWA({
 		includePaths: [path.join(__dirname, 'styles')],
 	},
 	env: {
-		POSTGRES_USER: 'sxhtymafgofeuz',
-		POSTGRES_PASSWORD:'787c8df8725df7e5cb51f0adb1bff0f54ab1beb181381f9a272b555bee50a2cb',
-		POSTGRES_DATABASE: 'dfrdeqif5p2cpv',
-		POSTGRES_HOST: 'ec2-3-219-111-26.compute-1.amazonaws.com',
+		POSTGRES_USER: config.username,
+		POSTGRES_PASSWORD: config.password,
+		POSTGRES_DATABASE: config.database,
+		POSTGRES_HOST: config.host,
 		POSTGRES_PORT: 5432,
 		POSTGRES_DIALECT: 'postgres',
 		BASE_URL: 'http://brainlox.com',
