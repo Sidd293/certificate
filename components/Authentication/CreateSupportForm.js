@@ -2,9 +2,10 @@ import React from "react";
 import { Alert, Spinner } from "reactstrap";
 import Link from "next/link";
 import axios from "axios";
+import baseUrl from "@/utils/baseUrl";
+import { parseCookies } from "nookies";
+import { redirectUser } from "@/utils/auth";
 import catchErrors from "../../utils/catchErrors";
-import baseUrl from "../../utils/baseUrl";
-import { handleLogin } from "../../utils/auth";
 import { useToasts } from "react-toast-notifications";
 import { useRouter } from "next/router";
 
@@ -27,7 +28,7 @@ const INITIAL_USER = {
   role: "support",
 };
 
-const CreateSupportForm = () => {
+const CreateSupportForm = ({ users }) => {
   const [user, setUser] = React.useState(INITIAL_USER);
   const [disabled, setDisabled] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
@@ -35,7 +36,9 @@ const CreateSupportForm = () => {
   const onDismiss = () => setError(false);
   const { addToast } = useToasts();
   const router = useRouter();
+  // const { token } = parseCookies();
 
+  console.log(users);
   React.useEffect(() => {
     const isUser = Object.values(user).every((el) => Boolean(el));
     isUser ? setDisabled(false) : setDisabled(true);
@@ -55,8 +58,7 @@ const CreateSupportForm = () => {
       const url = `${baseUrl}/api/v1/authSupport/supportSignup`;
       const payload = { ...user };
       const response = await axios.post(url, payload);
-      // handleLogin(response.data);
-      // console.log(response.data);
+      // console.log(response);
       addToast("Congratulations,successfully added Support User", {
         appearance: "success",
       });
@@ -100,33 +102,6 @@ const CreateSupportForm = () => {
             onChange={handleChange}
           />
         </div>
-
-        {/* <div className="form-group">
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Password"
-                        name="password"
-                        value={user.password}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Confirm Password"
-                        name="confirmPassword"
-                        value={user.confirmPassword}
-                        onChange={handleChange}
-                    />
-                </div> */}
-
-        {/* <p className="description">The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & )</p> */}
-
         <button type="submit" disabled={disabled}>
           Add
           {loading ? <Spinner color="success" /> : ""}
@@ -134,6 +109,20 @@ const CreateSupportForm = () => {
       </form>
     </div>
   );
+};
+
+CreateSupportForm.getInitialProps = async (ctx) => {
+  const { token } = parseCookies(ctx);
+  if (!token) {
+    redirectUser(ctx, "/");
+  }
+  // const { id } = ctx.query
+  const payload = {
+    headers: { Authorization: token },
+  };
+  const url = `${baseUrl}/api/v1/admin/users`;
+  const response = await axios.get(url, payload);
+  return response.data;
 };
 
 export default CreateSupportForm;

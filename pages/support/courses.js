@@ -16,12 +16,22 @@ const adminCourses = ({ courses }) => {
   const { addToast } = useToasts();
   const router = useRouter();
 
-  const confirmEditCourse = () => {
-    const result = window.confirm("Are you sure");
-    if (result === true) {
-      console.log("Edit btn clicked");
-    }
-  };
+  // const confirmEditCourse = (id) => {
+  //   MySwal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, delete it!",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       router.replace('/support/course/[]')
+  //       console.log(id);
+  //     }
+  //   });
+  // };
   const confirmDelete = (id) => {
     MySwal.fire({
       title: "Are you sure?",
@@ -33,8 +43,8 @@ const adminCourses = ({ courses }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // deleteCourseHandeler(id)
-        console.log(id);
+        deleteCourseHandeler(id);
+        // console.log(id);
       }
     });
   };
@@ -139,15 +149,15 @@ const adminCourses = ({ courses }) => {
                               <td>{request.title}</td>
                               <td className="text-right">
                                 <button
-                                  onClick={(e) => {
-                                    confirmEditCourse();
-                                  }}
+                                  // onClick={(e) => {
+                                  //   confirmEditCourse(request.id);
+                                  // }}
                                   className="btn btn-success mr-05"
                                 >
                                   <Link
-                                    href=""
-                                    // href="/teacher/course/[id]"
-                                    // as={`/teacher/course/${request.id}`}
+                                    // href=""
+                                    href="/support/course/[id]"
+                                    as={`/support/course/${request.id}`}
                                   >
                                     <a className="btn btn-success">
                                       <i className="bx bxs-edit"></i> Edit

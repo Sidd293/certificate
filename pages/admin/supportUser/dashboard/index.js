@@ -7,21 +7,35 @@ import { parseCookies } from "nookies";
 import { redirectUser } from "@/utils/auth";
 import { useToasts } from "react-toast-notifications";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const index = ({ users }) => {
   const { addToast } = useToasts();
   const router = useRouter();
   const { token } = parseCookies();
 
+  // console.log(users);
+
   const fetchedSupportUsers = users.filter((sUser) => sUser.role === "support");
 
   const confirmDelete = (id) => {
-    const result = window.confirm("Are you Sure ?");
-
-    if (result === true) {
-      // console.log(id);
-      supportUserDeleteHandeler(id);
-    }
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        supportUserDeleteHandeler(id);
+        // console.log(id);
+      }
+    });
   };
 
   const supportUserDeleteHandeler = async (id) => {
