@@ -1,40 +1,19 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { parseCookies } from "nookies";
 import axios from "axios";
 import baseUrl from "@/utils/baseUrl";
 import PageBanner from "@/components/Common/PageBanner";
 import Link from "@/utils/ActiveLink";
-import { redirectUser } from "@/utils/auth";
 
-const index = ({ courses }) => {
-  const [totalAssigned, setTotalAssigned] = useState("");
-
-  const totalAssignedCourses = async (ctx) => {
-    const { token } = parseCookies(ctx);
-    if (!token) {
-      redirectUser(ctx, "/");
-    }
-    const payload = {
-      headers: { Authorization: token },
-    };
-    const url = `${baseUrl}/api/v1/teacher/assigned_courses`;
-    const response = await axios.get(url, payload);
-    setTotalAssigned(response.data.enrolled.length);
-  };
-
-  useEffect(() => {
-    totalAssignedCourses();
-  }, []);
-
-
-
+const assignedCourses = ({ enrolled }) => {
+  console.log(enrolled);
   return (
     <React.Fragment>
       <PageBanner
-        pageTitle="Teacher Dashboard"
+        pageTitle="Assigned Courses"
         homePageUrl="/"
         homePageText="Home"
-        activePageText="Teacher Dashboard"
+        activePageText="Assigned Courses"
       />
 
       <div className="ptb-100">
@@ -85,20 +64,29 @@ const index = ({ courses }) => {
             </div>
 
             <div className="col-md-8 col-lg-8">
-              <div className="row">
-                <h3>Teacher Dashboard</h3>
-                <table className="table table-striped">
+              <div className="table-responsive">
+                <table className="table vertical-align-top">
                   <thead>
+                    <tr>
+                      <th scope="col">Courses</th>
+                      <th scope="col" className="text-right">
+                        Action
+                      </th>
+                    </tr>
                   </thead>
+
                   <tbody>
-                    <tr>
-                      <th scope="row">Total no of courses</th>
-                      <td>{courses.length}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Total no of assigned courses</th>
-                      <td>{totalAssigned}</td>
-                    </tr>
+                    {enrolled.length ? (
+                      enrolled.map((course) => (
+                        <tr key={course.id}>
+                          <td>{course.course.title}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr className="text-center">
+                        <td colSpan="3">Empty</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -110,7 +98,7 @@ const index = ({ courses }) => {
   );
 };
 
-index.getInitialProps = async (ctx) => {
+assignedCourses.getInitialProps = async (ctx) => {
   const { token } = parseCookies(ctx);
   if (!token) {
     return { courses: [] };
@@ -120,10 +108,10 @@ index.getInitialProps = async (ctx) => {
     headers: { Authorization: token },
   };
 
-  const url = `${baseUrl}/api/v1/courses/my-courses`;
+  const url = `${baseUrl}/api/v1/teacher/assigned_courses`;
   const response = await axios.get(url, payload);
   // console.log(response.data)
   return response.data;
 };
 
-export default index;
+export default assignedCourses;

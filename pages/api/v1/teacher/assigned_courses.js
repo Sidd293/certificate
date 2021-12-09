@@ -24,37 +24,33 @@ export default async (req, res) => {
 
   try {
     const { userId } = jwt.verify(req.headers.authorization, process.env.JWT_SECRET)
+    
     const enrolled = await Enroled_courses.findAll({
       order: [
         ['createdAt', 'DESC']
       ],
 
+      where:{
+          teacherId: userId
+      },
       include: [{
+        model: User,
+        as: 'teacher',
+        attributes: ['id', 'name', 'profilePhoto']
+      },
+      {
         model: User,
         as: 'user',
         attributes: ['id', 'name', 'profilePhoto']
-      }, {
+      },
+    {
         model: Course, 
         as: 'course',
-        // attributes: ['id', 'title']
-        // separate: true,
-        // include: [{
-        //     model: Enroled_courses, as: 'enroled_courses',
-        //     attributes: ['id']
-        // }]
-      }]
+        attributes: ['id', 'title']
+    }]
     })
 
-    const teachers = await User.findAll({
-      where:{
-        role: 'teacher'
-      },
-      order: [
-        ['createdAt', 'DESC']
-      ],
-    })
-
-    res.send({enrolled, teachers})
+    res.send({enrolled})
   } catch (error) {
     console.log(error)
   }

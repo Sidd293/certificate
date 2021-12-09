@@ -1,10 +1,14 @@
 import mailer from "@/utils/mailer";
 import initMiddleware from "@/lib/init-middleware";
 import Cors from "cors";
+import { referrals as Referral } from '@/models/index'
 
+// Initialize the cors middleware
 const cors = initMiddleware(
+  // You can read more about the available options here: https://github.com/expressjs/cors#configuration-options
   Cors({
-    methods: ["POST"]
+    // Only allow requests with GET, POST and OPTIONS
+    methods: ['GET', 'POST', 'OPTIONS', 'DELETE', 'PUT']
   })
 )
 
@@ -58,12 +62,29 @@ export default async (req, res) => {
         `
   }
 
-  try {
-    const response = await(mailer(dataForSupport) && mailer(dataForSender) && mailer(dataForReceiver))
-    console.log(response)
+  try{
+    const giftCourseReferral = await Referral.create({
+      sender_name: name,
+      sender_email: email ,
+      sender_phone: number,
+      receiver_name: friendName,
+      receiver_email: friendEmail,
+      receiver_phone: friendNumber,
+      msg_from_sender: text,
+      medium: 'gift-a-course',
+    })
+
+    // res.send('Data saved successfully.')
+    // console.log(giftCourseReferral)
+    // res.status(200).send('Data saved successfully.')
+
+    await(mailer(dataForSupport) && mailer(dataForSender) && mailer(dataForReceiver))
+    // console.log(response)
     res.status(200).send('Email sent successfully')
   } catch (error) {
     console.log(error)
     res.status(500).send('Error sending email')
   }
+  
+  
 }

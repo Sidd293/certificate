@@ -4,6 +4,7 @@ import Video from './video';
 import Enroled_courses from './enroled_courses';
 // import Cart from './cart';
 import App_Settings from "./app_settings";
+import Referral from "./referral";
 
 import Seed from '../seeders/20201231055353-admin-user';
 
@@ -13,6 +14,8 @@ import video from '../migrations/20210111073325-create-video';
 import enrolled_course from '../migrations/20210125063131-create-enroled-courses';
 // import cart from '../migrations/20211103152632-create-cart';
 import appSettings from "../migrations/20211106161551-create-app-settings";
+import referral from "../migrations/20211206151619-create-referral";
+
 
 // import userUpdated from "../migrations/20211110142150-modify_users_add_new_fields";
 
@@ -58,6 +61,8 @@ db.courses = Course(sequelize, Sequelize);
 db.videos = Video(sequelize, Sequelize);
 db.enroled_courses = Enroled_courses(sequelize, Sequelize);
 // db.carts = Cart(sequelize, Sequelize);
+db.referrals = Referral(sequelize, Sequelize);
+
 
 db.appSettings = App_Settings(sequelize, Sequelize);
 
@@ -69,6 +74,7 @@ const queryInterface = sequelize.getQueryInterface();
 	await video.up(queryInterface, Sequelize);
 	await enrolled_course.up(queryInterface, Sequelize);
 	// await cart.up(queryInterface, Sequelize);
+	await referral.up(queryInterface, Sequelize);
 	await appSettings.up(queryInterface, Sequelize);
 	// await userUpdated.up(queryInterface, Sequelize);
 })();
@@ -123,6 +129,15 @@ db.enroled_courses.belongsTo(db.users, {
 	as: 'user',
 });
 
+// hasMany relationshipt with user and enroled
+db.users.hasMany(db.enroled_courses, {
+	as: 'assigned_courses',
+	foreignKey: 'userId',
+});
+db.enroled_courses.belongsTo(db.users, {
+	foreignKey: 'teacherId',
+	as: 'teacher',
+});
 // hasMany relationshipt with course and enroled
 // db.courses.hasMany(db.carts, {
 // 	as: 'carts',

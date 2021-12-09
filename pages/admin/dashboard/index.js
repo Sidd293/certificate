@@ -86,6 +86,35 @@ const index = () => {
                       <a>Support Users</a>
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/admin/teacher" activeClassName="active">
+                      <a>Teachers</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/admin/enrolled_courses"
+                      activeClassName="active"
+                    >
+                      <a>Sold Courses</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/admin/assign_teachers"
+                      activeClassName="active"
+                    >
+                      <a>Assign Teachers</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/admin/referrels"
+                      activeClassName="active"
+                    >
+                      <a>Referrels</a>
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>

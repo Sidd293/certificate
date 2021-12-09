@@ -161,8 +161,7 @@ const CoursesDetailsSidebar = ({
           </a>
           <br />
           
-          {/* {loggedInUser && courseBought &&
-            <>
+          {loggedInUser && courseBought &&
               <Link href="/my-courses">
                 <a
                   className="default-btn"
@@ -175,7 +174,6 @@ const CoursesDetailsSidebar = ({
                   Go to Course <span></span>
                 </a>
               </Link>
-            </>
           }
 
           {loggedInUser && !courseBought &&
@@ -187,7 +185,7 @@ const CoursesDetailsSidebar = ({
               name={title}
               className="mt-2"
             />
-          } */}
+          }
           
         </div>
       </div>
