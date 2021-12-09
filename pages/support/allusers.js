@@ -8,30 +8,57 @@ import { redirectUser } from "@/utils/auth";
 import { filter } from "next-pwa/cache";
 import { useToasts } from "react-toast-notifications";
 import { useRouter } from "next/router";
+import Router, { route } from "next/dist/server/router";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal)
 
 const index = ({ users }) => {
   const { addToast } = useToasts();
-  const { router } = useRouter();
+  const router = useRouter();
   const { token } = parseCookies();
 
   //   console.log(fetchedSupportUsers);
 
+  const confirmDelete = (id) => {
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        supportUserDeleteHandeler(id)
+        // console.log(id);
+      }
+    });
+  };
+
   const supportUserDeleteHandeler = async (id) => {
     try {
-      const url = `${baseUrl}/api/v1/auth/deleteSupport`;
+      const url = `${baseUrl}/api/v1/auth/deleteUser`;
       const payload = { id: id };
       const response = await axios.post(url, payload, {
         headers: { Authorization: token },
       });
 
       // console.log(response.data)
+
       addToast(response.data, {
         appearance: "success",
       });
-      router.push("/admin/supportUser/dashboard");
+
+      router.reload();
     } catch (error) {
       //   catchErrors(error, setError)
-      console.log(error);
+      // console.log(error);
+      addToast("Something went wrong...", {
+        appearance: "error",
+      });
     }
   };
 
@@ -74,11 +101,11 @@ const index = ({ users }) => {
                     </Link>
                   </li>
 
-                  <li>
+                  {/* <li>
                     <Link href="/support/curriculum" activeClassName="active">
                       <a>Course Curriculum</a>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link href="/support/appsettings" activeClassName="active">
                       <a>App Settings</a>
@@ -98,6 +125,7 @@ const index = ({ users }) => {
                       <th scope="col">#</th>
                       <th scope="col">Name</th>
                       <th scope="col">Email</th>
+                      <th scope="col">Role</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -110,12 +138,14 @@ const index = ({ users }) => {
                               <th scope="row">{index + 1}</th>
                               <td>{user.name}</td>
                               <td>{user.email}</td>
+                              <td>{user.role}</td>
                               <td>
                                 <button
                                   type="button"
                                   className="btn btn-danger"
-                                  onClick={(e) =>
-                                    supportUserDeleteHandeler(user.id)
+                                  onClick={
+                                    (e) => confirmDelete(user.id)
+                                    // supportUserDeleteHandeler(user.id)
                                   }
                                 >
                                   Delete

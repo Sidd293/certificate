@@ -5,6 +5,7 @@ import axios from "axios";
 import baseUrl from "@/utils/baseUrl";
 import { parseCookies } from "nookies";
 import { redirectUser } from "@/utils/auth";
+import Preloader from "@/components/_App/Preloader";
 
 const index = () => {
   const [totalCourses, setTotalCourses] = useState("");
@@ -64,10 +65,15 @@ const index = () => {
                     </Link>
                   </li>
                   <li>
+                    <Link href="/admin/allusers" activeClassName="active">
+                      <a>All Users</a>
+                    </Link>
+                  </li>
+                  {/* <li>
                     <Link href="/admin/curriculum" activeClassName="active">
                       <a>Course Curriculum</a>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link href="/admin/appsettings" activeClassName="active">
                       <a>App Settings</a>
@@ -131,14 +137,20 @@ const index = () => {
                     </tr> */}
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">Total no of users</th>
-                      <td>{totalUsers}</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Total no of courses</th>
-                      <td>{totalCourses}</td>
-                    </tr>
+                    {totalCourses && totalUsers !== "" ? (
+                      <>
+                        <tr>
+                          <th scope="row">Total no of users</th>
+                          <td>{totalUsers}</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">Total no of courses</th>
+                          <td>{totalCourses}</td>
+                        </tr>
+                      </>
+                    ) : (
+                      <Preloader />
+                    )}
                   </tbody>
                 </table>
               </div>

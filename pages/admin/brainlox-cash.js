@@ -104,6 +104,7 @@ const brainloxCash = ({ users }) => {
                   <thead>
                     <tr>
                       <th scope="col">Name</th>
+                      <th scope="col">Email</th>
                       <th scope="col">Cash</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -116,6 +117,7 @@ const brainloxCash = ({ users }) => {
                           return (
                             <tr key={user.id}>
                               <td>{user.name}</td>
+                              <td>{user.email}</td>
                               <td>
                                 {inEditMode.status &&
                                 inEditMode.rowKey === user.id ? (

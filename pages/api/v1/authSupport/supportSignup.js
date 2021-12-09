@@ -66,13 +66,14 @@ export default async (req, res) => {
 
     const mailingModel = {
       email,
-      subject: "Email Verification",
+      subject: "Hello Brainlox Support!",
       html: `
-				Dear ${name}!
-				Thank you for registering Brainlox, The World's Leading Distance-Learning Provider.
-				You are assigned as a Support User. Here are your credentials.
-        Username:- ${email}
-        Password:- ${password}
+      Hello ${name}, you are added as brainlox support. Please find your username and password here.<br>
+      username: ${email}<br>
+      password: ${password}<br><br>
+      
+      Regards<br>
+      Brainlox team.
 			`,
     };
 
