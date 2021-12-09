@@ -68,3 +68,4 @@ node_modules/
 #custom
 .DS_Store
 /utils/baseUrl.js
+/config/config.json
