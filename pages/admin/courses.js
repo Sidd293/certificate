@@ -7,11 +7,62 @@ import baseUrl from "@/utils/baseUrl";
 import catchErrors from "@/utils/catchErrors";
 import PageBanner from "@/components/Common/PageBanner";
 import Link from "@/utils/ActiveLink";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const adminCourses = ({ courses }) => {
+  const { token } = parseCookies();
   const { addToast } = useToasts();
   const router = useRouter();
 
+  const confirmEditCourse = () => {
+    const result = window.confirm("Are you sure?");
+    if (result === true) {
+      console.log("Edit btn clicked");
+    }
+  };
+  const confirmDelete = (id) => {
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteCourseHandeler(id);
+        console.log(id);
+      }
+    });
+  };
+
+  const deleteCourseHandeler = async (id) => {
+    try {
+      const url = `${baseUrl}/api/v1/courses/deleteCourse`;
+      const payload = { id: id };
+      const response = await axios.post(url, payload, {
+        headers: { Authorization: token },
+      });
+
+      // console.log(response.data)
+
+      addToast(response.data, {
+        appearance: "success",
+      });
+
+      router.reload();
+    } catch (error) {
+      //   catchErrors(error, setError)
+      console.log(error);
+      addToast("Something went wrong...", {
+        appearance: "error",
+      });
+    }
+  };
   return (
     <React.Fragment>
       <PageBanner
@@ -65,13 +116,14 @@ const adminCourses = ({ courses }) => {
                               <td className="text-right">
                                 <button
                                   onClick={(e) => {
-                                    window.confirm("Are you sure?");
+                                    confirmEditCourse();
                                   }}
                                   className="btn btn-success mr-05"
                                 >
                                   <Link
-                                    href="/teacher/course/[id]"
-                                    as={`/teacher/course/${request.id}`}
+                                    href=""
+                                    // href="/teacher/course/[id]"
+                                    // as={`/teacher/course/${request.id}`}
                                   >
                                     <a className="btn btn-success">
                                       <i className="bx bxs-edit"></i> Edit
@@ -81,7 +133,7 @@ const adminCourses = ({ courses }) => {
 
                                 <button
                                   onClick={(e) => {
-                                    window.confirm("Are you sure?");
+                                    confirmDelete(request.id);
                                   }}
                                   className="btn btn-danger"
                                 >

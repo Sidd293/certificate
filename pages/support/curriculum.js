@@ -156,11 +156,11 @@ const UploadCourseVideo = ({ courses }) => {
                     </Link>
                   </li>
 
-                  <li>
+                  {/* <li>
                     <Link href="/support/curriculum" activeClassName="active">
                       <a>Course Curriculum</a>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link href="/support/appsettings" activeClassName="active">
                       <a>App Settings</a>

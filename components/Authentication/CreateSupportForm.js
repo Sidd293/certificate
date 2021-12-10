@@ -5,6 +5,8 @@ import axios from "axios";
 import catchErrors from "../../utils/catchErrors";
 import baseUrl from "../../utils/baseUrl";
 import { handleLogin } from "../../utils/auth";
+import { useToasts } from "react-toast-notifications";
+import { useRouter } from "next/router";
 
 const generatePassword = () => {
   var length = 8,
@@ -31,6 +33,8 @@ const CreateSupportForm = () => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState("");
   const onDismiss = () => setError(false);
+  const { addToast } = useToasts();
+  const router = useRouter();
 
   React.useEffect(() => {
     const isUser = Object.values(user).every((el) => Boolean(el));
@@ -44,7 +48,7 @@ const CreateSupportForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
+    // console.log(user);
     try {
       setLoading(true);
       setError("");
@@ -52,7 +56,12 @@ const CreateSupportForm = () => {
       const payload = { ...user };
       const response = await axios.post(url, payload);
       // handleLogin(response.data);
-      console.log(response.data);
+      // console.log(response.data);
+      addToast("Congratulations,successfully added Support User", {
+        appearance: "success",
+      });
+      setUser({ name: "", email: "" });
+      // router.reload();
     } catch (error) {
       catchErrors(error, setError);
     } finally {

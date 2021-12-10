@@ -207,7 +207,7 @@ const Create = () => {
       // setCoverPhotoPreview("");
       // setCoursePreviewImg("");
       toast.success(response.data);
-      // router.replace("/teacher/course/upload-course-video");
+      router.replace("/support/createCourse");
     } catch (err) {
       catchErrors(err, setError);
       toast.error(error);
@@ -255,11 +255,11 @@ const Create = () => {
                     </Link>
                   </li>
 
-                  <li>
+                  {/* <li>
                     <Link href="/support/curriculum" activeClassName="active">
                       <a>Course Curriculum</a>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link href="/support/appsettings" activeClassName="active">
                       <a>App Settings</a>
