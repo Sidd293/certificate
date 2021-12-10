@@ -1,5 +1,5 @@
-const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'http://localhost:3000'
 
-// const baseUrl = 'https://brainlox.com'
+const baseUrl = 'https://dev.brainlox.com'
 
 export default baseUrl;
