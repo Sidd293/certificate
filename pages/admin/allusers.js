@@ -32,8 +32,8 @@ const index = ({ users }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // supportUserDeleteHandeler(id)
-        console.log(id);
+        supportUserDeleteHandeler(id)
+        // console.log(id);
       }
     });
   };
