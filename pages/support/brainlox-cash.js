@@ -93,11 +93,11 @@ const brainloxCash = ({ users }) => {
                     </Link>
                   </li>
 
-                  <li>
+                  {/* <li>
                     <Link href="/support/curriculum" activeClassName="active">
                       <a>Course Curriculum</a>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link href="/support/appsettings" activeClassName="active">
                       <a>App Settings</a>
@@ -113,6 +113,7 @@ const brainloxCash = ({ users }) => {
                   <thead>
                     <tr>
                       <th scope="col">Name</th>
+                      <th scope="col">Email</th>
                       <th scope="col">Cash</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -125,6 +126,7 @@ const brainloxCash = ({ users }) => {
                           return (
                             <tr key={user.id}>
                               <td>{user.name}</td>
+                              <td>{user.email}</td>
                               <td>
                                 {inEditMode.status &&
                                 inEditMode.rowKey === user.id ? (
@@ -236,7 +238,7 @@ brainloxCash.getInitialProps = async (ctx) => {
   };
   const url = `${baseUrl}/api/v1/admin/users`;
   const response = await axios.get(url, payload);
-  console.log(response);
+  // console.log(response);
   return response.data;
 };
 
