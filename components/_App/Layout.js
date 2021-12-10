@@ -10,6 +10,7 @@ import StudentNavbar from "./StudentNavbar";
 import AdminNavbar from "./AdminNavbar";
 import Preloader from "./Preloader";
 import SupportNavbar from "./SupportNavbar";
+import InfoBanner from '@/components/Index/InfoBanner';
 
 const Layout = ({ children, user }) => {
   const [loader, setLoader] = React.useState(true);
@@ -60,6 +61,7 @@ const Layout = ({ children, user }) => {
       {loader && <Preloader />}
 
       <Toaster position="top-left" reverseOrder={false} />
+      <InfoBanner/>
 
       <ToastProvider
         placement="bottom-left"

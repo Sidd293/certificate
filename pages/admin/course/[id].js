@@ -207,10 +207,10 @@ const Edit = ({ existingData }) => {
   return (
         <React.Fragment>
             <PageBanner
-                pageTitle="Edit Course"
+                pageTitle="Admin Edit Course"
                 homePageUrl="/"
                 homePageText="Home"
-                activePageText="Edit Course"
+                activePageText="Admin Edit Course"
             />
 
             <div className="ptb-100">

@@ -17,12 +17,12 @@ const adminCourses = ({ courses }) => {
   const { addToast } = useToasts();
   const router = useRouter();
 
-  const confirmEditCourse = () => {
-    const result = window.confirm("Are you sure?");
-    if (result === true) {
-      console.log("Edit btn clicked");
-    }
-  };
+  // const confirmEditCourse = () => {
+  //   const result = window.confirm("Are you sure?");
+  //   if (result === true) {
+  //     console.log("Edit btn clicked");
+  //   }
+  // };
   const confirmDelete = (id) => {
     MySwal.fire({
       title: "Are you sure?",
@@ -35,7 +35,7 @@ const adminCourses = ({ courses }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteCourseHandeler(id);
-        console.log(id);
+        // console.log(id);
       }
     });
   };
@@ -115,15 +115,15 @@ const adminCourses = ({ courses }) => {
                               <td>{request.title}</td>
                               <td className="text-right">
                                 <button
-                                  onClick={(e) => {
-                                    confirmEditCourse();
-                                  }}
+                                  // onClick={(e) => {
+                                  //   confirmEditCourse();
+                                  // }}
                                   className="btn btn-success mr-05"
                                 >
                                   <Link
-                                    href=""
-                                    // href="/teacher/course/[id]"
-                                    // as={`/teacher/course/${request.id}`}
+                                    // href=""
+                                    href="/admin/course/[id]"
+                                    as={`/admin/course/${request.id}`}
                                   >
                                     <a className="btn btn-success">
                                       <i className="bx bxs-edit"></i> Edit
