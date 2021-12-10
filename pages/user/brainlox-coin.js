@@ -13,19 +13,12 @@ import { redirectUser } from "@/utils/auth";
 const brainloxCoins = ({name, brainlox_coin}) => {
   return (
     <React.Fragment>
-      <PageBanner
-        pageTitle="Brainlox Cash"
-        homePageUrl="/"
-        homePageText="Home"
-        activePageText="Brainlox Cash"
-      />
-
       <div className="ptb-100">
         <div className="container">
           <div className="totalCoin-Container">
             <div className="totalCoin-left">
               <h1>${!brainlox_coin ? '0' : brainlox_coin}</h1>
-              <span>See how you can use.</span>
+              <span>Scroll to see how you can use.</span>
             </div>
 
             {/* <a className="default-btn">
