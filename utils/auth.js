@@ -3,7 +3,7 @@ import Router from 'next/router'
 
 export const handleLogin = (token) => {
   cookie.set('token', token)
-  Router.push('/')
+  Router.push('/user/brainlox-coin')
 }
 
 export const redirectUser = (ctx, location) => {

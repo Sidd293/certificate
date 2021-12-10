@@ -18509,19 +18509,24 @@ Funfacts Area CSS
 /* Brainlox Coin Styles */
 
 .totalCoin-Container {
-  background-color: lightblue;
+  background-color: #ffc107;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 25px 59px;
+  width: 340px;
+  margin: auto;
+}
+.totalCoin-left{
+  text-align: center;
 }
 .totalCoin-left h1 {
   font-weight: bolder;
-  color: #0096ff;
+  color: #221638;
 }
 .totalCoin-left span {
-  color: #0096ff;
+  color: #221638;
 }
 /* .AllTransaction-Container {
   
