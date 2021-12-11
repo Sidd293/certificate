@@ -186,6 +186,8 @@ const CoursesDetailsSidebar = ({
               className="mt-2"
             />
           }
+
+          {!loggedInUser && <p style={{color: "#fe4a55", textAlign: 'center'}}>Login to Buy to the Course</p>}
           
         </div>
       </div>
