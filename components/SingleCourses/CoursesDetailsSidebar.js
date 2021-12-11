@@ -161,7 +161,7 @@ const CoursesDetailsSidebar = ({
           </a>
           <br />
           
-          {loggedInUser && courseBought &&
+          {/* {loggedInUser && courseBought &&
               <Link href="/my-courses">
                 <a
                   className="default-btn"
@@ -187,7 +187,7 @@ const CoursesDetailsSidebar = ({
             />
           }
 
-          {!loggedInUser && <p style={{color: "#fe4a55", textAlign: 'center'}}>Login to Buy to the Course</p>}
+          {!loggedInUser && <p style={{color: "#fe4a55", textAlign: 'center'}}>Login to Buy to the Course</p>} */}
           
         </div>
       </div>
