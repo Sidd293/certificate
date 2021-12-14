@@ -45,6 +45,7 @@ const LoginForm = () => {
   };
 
   const reSendEmail = async (ctx) => {
+    ctx.preventDefault()
     try {
       setLoading(true);
       setError("");
