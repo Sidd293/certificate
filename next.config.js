@@ -37,5 +37,6 @@ module.exports = withPWA({
 		CLOUDINARY_VIDEO_URL:'https://api.cloudinary.com/v1_1/dev-empty/video/upload',
 		STRIPE_SECRET_KEY: 'sk_test_51JtwnvSDUNQUeGjijWdYoknBg0zwjkchR1LyrOLKGQ36jH2nJX4TFeZ0LRY4ud3kHtKXpgxHn1rXsFHPW91m0LYJ00sfRWUrlJ',
 		STRIPE_PUBLISHABLE_KEY: 'pk_test_51JtwnvSDUNQUeGjiFxNq6lhchY0Rp208UnLxxdXMRL8Ob2EFOoUUfEak8dFfibSC2E9oAxqqVgChoFnDgAcSnlP300zopGA9D4',
+		GOOGLE_ANALYTICS_KEY:'G-HYV7ZZF0SV'
 	},
 });
