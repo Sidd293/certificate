@@ -5,6 +5,7 @@ import axios from 'axios';
 import catchErrors from '../../utils/catchErrors';
 import baseUrl from '../../utils/baseUrl';
 import { handleLogin } from '../../utils/auth';
+import * as ga from '../../lib/gtag'
 
 const INITIAL_USER = {
 	email: '',
@@ -37,6 +38,13 @@ const LoginForm = () => {
 			const payload = { ...user };
 			const response = await axios.post(url, payload);
 			handleLogin(response.data);
+			// dataLayer.push({'login': 'loggedin'});
+				ga.event({
+				  action: "login",
+				  params : {
+					loggedin: 'user_loggedin'
+				  }
+				})
 		} catch (error) {
 			catchErrors(error, setError);
 		} finally {
