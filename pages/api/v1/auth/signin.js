@@ -37,10 +37,10 @@ export default async (req, res) => {
           "This account is temporarily disabled, please contact the support email"
         );
     }
-    if (user.emailConfirmed === false) {
-      console.log("email not verifed");
-      return res.status(401).send(401)
-    }
+    // if (user.emailConfirmed === false) {
+    //   console.log("email not verifed");
+    //   return res.status(401).send(401)
+    // }
 
     const passwordsMatch = await bcrypt.compare(password, user.password);
     if (passwordsMatch) {
