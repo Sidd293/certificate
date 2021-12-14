@@ -8,6 +8,7 @@ import { handleLogin, redirectUser } from "../../utils/auth";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { parseCookies } from "nookies";
+import * as ga from '../../lib/gtag'
 
 const MySwal = withReactContent(Swal);
 
@@ -80,6 +81,13 @@ const LoginForm = () => {
       const payload = { ...user };
       const response = await axios.post(url, payload);
       handleLogin(response.data);
+	  // dataLayer.push({'login': 'loggedin'});
+	  ga.event({
+		action: "login",
+		params : {
+		  loggedin: 'user_loggedin'
+		}
+	  })
     } catch (error) {
       if (error.response.status === 401) {
         MySwal.fire({
