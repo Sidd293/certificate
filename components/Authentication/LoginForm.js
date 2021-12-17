@@ -8,7 +8,8 @@ import { handleLogin, redirectUser } from "../../utils/auth";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { parseCookies } from "nookies";
-import * as ga from '../../lib/gtag'
+import * as ga from "../../lib/gtag";
+import { useToasts } from "react-toast-notifications";
 
 const MySwal = withReactContent(Swal);
 
@@ -34,6 +35,7 @@ const LoginForm = () => {
   const [error, setError] = React.useState("");
   const onDismiss = () => setError(false);
   const { token } = parseCookies();
+  const { addToast } = useToasts();
 
   React.useEffect(() => {
     const isUser = Object.values(user).every((el) => Boolean(el));
@@ -46,14 +48,14 @@ const LoginForm = () => {
   };
 
   const reSendEmail = async (ctx) => {
-    ctx.preventDefault()
+    ctx.preventDefault();
     try {
       setLoading(true);
       setError("");
       const { token } = parseCookies(ctx);
-      if (!token) {
-        redirectUser(ctx, "/");
-      }
+      // if (!token) {
+      //   // redirectUser(ctx, "/");
+      // }
       // const { id } = ctx.query
       const url = `${baseUrl}/api/v1/admin/users/re-send-email`;
       const payload = { ...user };
@@ -74,43 +76,84 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      setError("");
-      const url = `${baseUrl}/api/v1/auth/signin`;
-      const payload = { ...user };
-      const response = await axios.post(url, payload);
+
+    setLoading(true);
+    setError("");
+    const url = `${baseUrl}/api/v1/auth/signin`;
+    const payload = { ...user };
+    const response = await axios.post(url, payload);
+    console.log(response);
+    if (response.status === 200) {
       handleLogin(response.data);
-	  // dataLayer.push({'login': 'loggedin'});
-	  ga.event({
-		action: "login",
-		params : {
-		  loggedin: 'user_loggedin'
-		}
-	  })
-    } catch (error) {
-      if (error.response.status === 401) {
-        MySwal.fire({
-          title: "Email not Verified",
-          text: "Please verify your email to Login",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Resend Email",
-          timer: 10000,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            reSendEmail;
-          }
-        });
-      } else {
-        // console.log(e);
-        catchErrors(error, setError);
-      }
-    } finally {
+      setLoading(false);
+      // dataLayer.push({'login': 'loggedin'});
+      ga.event({
+        action: "login",
+        params: {
+          loggedin: "user_loggedin",
+        },
+      });
+    } else if (response.status === 203) {
+      console.log(response);
+      MySwal.fire({
+        title: "Email not Verified",
+        text: "Please verify your email to Login",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Resend Email",
+        timer: 10000,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          reSendEmail(e);
+        }
+      });
+      setLoading(false);
+    } else {
+      addToast(response.data, {
+        appearance: "error",
+      });
       setLoading(false);
     }
+
+    // try {
+    //   setLoading(true);
+    //   setError("");
+    //   const url = `${baseUrl}/api/v1/auth/signin`;
+    //   const payload = { ...user };
+    //   const response = await axios.post(url, payload);
+    //   handleLogin(response.data);
+    // // dataLayer.push({'login': 'loggedin'});
+    // ga.event({
+    // action: "login",
+    // params : {
+    //   loggedin: 'user_loggedin'
+    // }
+    // })
+    // } catch (error) {
+    //   if (error.response.status === 401) {
+    //     MySwal.fire({
+    //       title: "Email not Verified",
+    //       text: "Please verify your email to Login",
+    //       icon: "warning",
+    //       showCancelButton: true,
+    //       confirmButtonColor: "#3085d6",
+    //       cancelButtonColor: "#d33",
+    //       confirmButtonText: "Resend Email",
+    //       timer: 10000,
+    //     }).then((result) => {
+    //       if (result.isConfirmed) {
+    //         reSendEmail;
+    //       }
+    //     });
+    //   } else {
+    //     // console.log(e);
+    //     catchErrors(error, setError);
+    //   }
+    // } finally {
+    //   setLoading(false);
+    // }
   };
   return (
     <div className="login-form">
