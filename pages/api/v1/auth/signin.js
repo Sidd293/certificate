@@ -19,7 +19,7 @@ export default async (req, res) => {
   const { email, password } = req.body;
   try {
     if (!isEmail(email)) {
-      return res.status(422).send("Email should be a valid email address");
+      return res.status(201).send("Email should be a valid email address");
     }
 
     const user = await User.findOne({
@@ -27,20 +27,20 @@ export default async (req, res) => {
     });
     console.log(user);
     if (!user) {
-      return res.status(404).send("User account does not exist");
+      return res.status(201).send("User account does not exist");
     }
 
     if (!user.active) {
       return res
-        .status(404)
+        .status(201)
         .send(
           "This account is temporarily disabled, please contact the support email"
         );
     }
-    // if (user.emailConfirmed === false) {
-    //   console.log("email not verifed");
-    //   return res.status(401).send(401)
-    // }
+    if (user.emailConfirmed === false) {
+      console.log("email not verifed");
+      return res.status(203).send(203);
+    }
 
     const passwordsMatch = await bcrypt.compare(password, user.password);
     if (passwordsMatch) {
@@ -49,7 +49,7 @@ export default async (req, res) => {
       });
       res.status(200).send(token);
     } else {
-      res.status(401).send("Password is not correct");
+      res.status(201).send("Password is not correct");
     }
     // const isEmailVerifed = await User.findOne({
     //   where: { email: email },
@@ -58,6 +58,6 @@ export default async (req, res) => {
     // console.log(isEmailVerifed);
   } catch (error) {
     // console.error(error)
-    res.status(500).send("Error logging in user");
+    res.status(299).send("Error logging in user, Please check your Internet Connection!");
   }
 };
