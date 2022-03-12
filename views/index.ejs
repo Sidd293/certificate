@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+    <button id = "btn">Download this Certificate</button>
+    <div style = "height: 0">
+      <div id="user">  <%= user %></div>
+      <div id="id">  <%= id %></div>
+      <div id="score">  <%= score %> </div>
+      <div id="subject">  <%= subject %> </div>
+      <div id="date">  <%= date %> </div>
+  
+    </div>
+
+
+
+
+
+  </head>
+  <body>
+   
+    <script>
+      let c
+function setup() {
+ c =  createCanvas(582, 384);
+ background(255);
+}
+document.getElementById("btn").addEventListener("click",()=>{
+  saveCanvas(c, 'cetrificate', 'jpg');
+})
+function preload()
+{
+  img = loadImage("https://res.cloudinary.com/triluxo-technologies-private-limited/image/upload/v1646920338/samples/animals/mind_logo-removebg-preview_ulxs2o.png");
+bg = loadImage('https://res.cloudinary.com/triluxo-technologies-private-limited/image/upload/v1646919378/samples/animals/newborder_ryf3t4.png')
+}
+x = 0
+y = 0
+r = 100
+i = 1
+t = 0
+r2 = 2*100/3;
+user = document.getElementById('user').innerText;
+date = document.getElementById('date').innerText;
+subject = document.getElementById('subject').innerText;
+id = document.getElementById('id').innerText;
+score = document.getElementById('score').innerText;
+
+
+function draw() {
+  push()
+   noFill()
+  angleMode(DEGREES);
+ background(255,5)
+ // stroke(0)
+ // circle(10,10,10)
+  translate(width/2,height/2);
+
+  beginShape()
+  for(i  = 0; i<=360   ; i+=20)
+    {
+      x = r*cos(i)
+      y = r*sin(i);
+      stroke(255,184,66)
+      strokeWeight(12)
+   //   stroke(0)
+    // curveVertex(x,y)
+     // vertex(x,y)
+    // line((r2)*cos(t),(r2)*sin(t),x,y)
+  // point(x,y)
+      // console.log(x,y)
+    } 
+  endShape() 
+  t+=1.6180
+
+  if(t%360 == 0 )stroke(random(255),0,random(255))
+  circle((r2*sin(t/2))*cos(t%360),(r2*sin(t/2))*sin(t%360),(r2*sin(t/2)))
+  circle(-(r2*sin(t/2))*cos(t%360),-(r2*sin(t/2))*sin(t%360),(r2*sin(t/2)))
+ pop()
+  image(bg,-10,-10,width+20,height+20)
+
+ 
+  image(img,width/2-45,30);
+ 
+  textAlign(CENTER)
+textSize(30);
+   textFont('Noto Serif')
+  
+text('BRAINLOX EDUCATION',width/2, 120);
+textAlign(CENTER)
+   textFont('Great Vibes')
+text('Certificate Of Excellence', width/2, 170);
+textSize(16);
+     textFont('Arial')
+text('presented to', width/2, 200);
+  textSize(32);
+     textFont('IBM Plex Serif')
+text(user, width/2, 240);
+  textSize(15);
+  text('For completing '+subject+' with'+ score +'%score', width/2, 280);
+
+   textFont('Arial')
+   text( date+"                                       ", width/2-30, 329);
+   text('DATE                                    DIRECTOR', width/2, 349);
+   textSize(15)
+ text(id,100,50);
+  
+  
+}
+
+    </script>
+  </body>
+</html>
