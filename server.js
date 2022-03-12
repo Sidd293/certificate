@@ -36,6 +36,7 @@ certificateSchema = new Schema({
     
       const id = req.params.id
       Certificate.findById(id).then((doc)=>{
+          console.log(doc);
         res.render('index',{ user : doc.user,date : doc.date,subject:doc.subject ,score : doc.score,id:id});
       }).catch((err)=>res.send(err));
     
@@ -49,6 +50,6 @@ certificateSchema = new Schema({
 
 
 
-app.listen(process.env.PORT || 8080,()=>{
+app.listen(process.env.PORT || 8083,()=>{
     console.log("ruing");
 })
