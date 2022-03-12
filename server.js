@@ -49,6 +49,6 @@ certificateSchema = new Schema({
 
 
 
-app.listen(8084,()=>{
+app.listen(process.env.PORT || 8080,()=>{
     console.log("ruing");
 })
