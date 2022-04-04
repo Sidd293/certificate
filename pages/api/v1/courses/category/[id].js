@@ -17,12 +17,12 @@ const cors = initMiddleware(
 
 export default async (req, res) => {
   await cors(req, res);
-  //   const { id } = req.query
+    const { id } = req.query
 
   // console.log(id)
   try {
     const courses = await Course.findAll({
-      //   where: { id: id },
+        where: { category : id  },
 
       include: [
         {
@@ -39,7 +39,7 @@ export default async (req, res) => {
       ],
     });
 
-    console.log(courses)
+    // console.log(courses)
 
     res.send({ courses });
   } catch (error) {
